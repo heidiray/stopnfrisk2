@@ -20,4 +20,15 @@ stopnfrisk_tibble$SUSPECT_RACE_DESCRIPTION[stopnfrisk_tibble$SUSPECT_RACE_DESCRI
 stopnfrisk_tibble$SUSPECT_RACE_DESCRIPTION[stopnfrisk_tibble$SUSPECT_RACE_DESCRIPTION == 'MIDDLE EASTERN/SOUTHWEST ASIAN'] <- 'Middle Eastern/Southwest Asian'
 
 #table
+sus_robberies <- subset(stopnfrisk_tibble, stopnfrisk_tibble$SUSPECTED_CRIME_DESCRIPTION == 'Robbery')
+sus_robberies_tibble <- as_tibble(sus_robberies)
+sus_robberies_tbl <- table(sus_robberies_tibble$SUSPECT_RACE_DESCRIPTION)
+
+sus_assault <- subset(stopnfrisk_tibble, stopnfrisk_tibble$SUSPECTED_CRIME_DESCRIPTION == 'ASSAULT')
+sus_assualt_tibble <- as_tibble(sus_assault)
+sus_assault_tbl <- table(sus_assault_tibble$SUSPECT_RACE_DESCRIPTION)
+observed_stat <- nrow(subset(sus_assault_tibble, SUSPECT_RACE_DESCRIPTION == 'BLACK'))/nrow(sus_assault)
+observed_stat
+
+
 
