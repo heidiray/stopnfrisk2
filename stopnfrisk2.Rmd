@@ -1,8 +1,10 @@
 getwd()
 install.packages(c("tidyverse","readstata13","readxl"))
 library(tidyverse)
-    library(Hmisc)
-stopnfrisk_tibble <- as_tibble(snf_2022)
+library(Hmisc)
+list.files()
+stopnfrisk_tibble <- as_tibble(sqf_2022)
+stopnfrisk_tibble
 #non-white people
 people_of_color <- subset(stopnfrisk_tibble, stopnfrisk_tibble$SUSPECT_RACE_DESCRIPTION != 'WHITE')
 race_tibble <- as_tibble(people_of_color)
@@ -24,11 +26,15 @@ sus_robberies <- subset(stopnfrisk_tibble, stopnfrisk_tibble$SUSPECTED_CRIME_DES
 sus_robberies_tibble <- as_tibble(sus_robberies)
 sus_robberies_tbl <- table(sus_robberies_tibble$SUSPECT_RACE_DESCRIPTION)
 
+
 sus_assault <- subset(stopnfrisk_tibble, stopnfrisk_tibble$SUSPECTED_CRIME_DESCRIPTION == 'ASSAULT')
 sus_assualt_tibble <- as_tibble(sus_assault)
 sus_assault_tbl <- table(sus_assault_tibble$SUSPECT_RACE_DESCRIPTION)
 observed_stat <- nrow(subset(sus_assault_tibble, SUSPECT_RACE_DESCRIPTION == 'BLACK'))/nrow(sus_assault)
 observed_stat
 
+#percent of new york pop that is black (2022), exp percent of crimes
+expected_stat <- 0.231
 
+t.test(observed_stat, expected_stat)
 
